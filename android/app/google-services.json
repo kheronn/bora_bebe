@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "757745219839",
+    "firebase_url": "https://crte-relatorio.firebaseio.com",
+    "project_id": "crte-relatorio",
+    "storage_bucket": "crte-relatorio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757745219839:android:45596edf02bc20d4d874ca",
+        "android_client_info": {
+          "package_name": "com.kheronn.bora_bebe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757745219839-k6eg6hus1ae65p2njcfkrpsks37e20g1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kheronn.bora_bebe",
+            "certificate_hash": "c08a8f6040ea3134478a2914c764fe564c08fdc9"
+          }
+        },
+        {
+          "client_id": "757745219839-n3n9j7io8pmav9a3qerinotc159etjsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3S9pmB1n6_-HkHrUzKBxs5LGDerJ-Mc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757745219839-n3n9j7io8pmav9a3qerinotc159etjsc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
