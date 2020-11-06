@@ -1,3 +1,4 @@
+import 'package:bora_bebe/app/modules/login/bindings/login_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +12,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       title: "Bora Bebe",
+      initialBinding: LoginBinding(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       getPages: AppPages.routes,

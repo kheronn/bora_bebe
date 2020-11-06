@@ -1,18 +1,21 @@
 import 'dart:async';
+import 'package:bora_bebe/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SplashView extends StatelessWidget {
+class SplashView extends GetView<LoginController> {
   SplashView() {
     startTimeout();
   }
 
   startTimeout() async {
-    return Timer(Duration(seconds: 10), changeScreen);
+    return Timer(Duration(seconds: 5), changeScreen);
   }
 
   changeScreen() async {
-    Get.toNamed('/home');
+    await controller.user.isNullOrBlank
+        ? Get.toNamed('/login')
+        : Get.toNamed('/home');
   }
 
   @override
