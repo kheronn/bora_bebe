@@ -13,9 +13,8 @@ class SplashView extends GetView<LoginController> {
   }
 
   changeScreen() async {
-    await controller.user.isNullOrBlank
-        ? Get.toNamed('/login')
-        : Get.toNamed('/home');
+    var result = await controller.checkUserLoggedIn();
+    Get.offAllNamed(result);
   }
 
   @override

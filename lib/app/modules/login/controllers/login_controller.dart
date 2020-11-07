@@ -1,42 +1,67 @@
+import 'package:bora_bebe/app/modules/home/views/home_view.dart';
+import 'package:bora_bebe/app/modules/login/views/login_view.dart';
+import 'package:bora_bebe/app/shared/loading_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginController extends GetxController {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-  Rx<User> _user = Rx<User>();
-  set user(u) => this._user.value = u;
-  User get user => this._user.value;
+  FirebaseApp firebaseApp;
+  User firebaseUser;
+  FirebaseAuth firebaseAuth;
+  final GoogleSignIn googleSignIn = new GoogleSignIn();
+
+  Future<void> initlizeFirebaseApp() async {
+    firebaseApp = await Firebase.initializeApp();
+  }
+
+  Future<String> checkUserLoggedIn() async {
+    if (firebaseApp == null) {
+      await initlizeFirebaseApp();
+    }
+    if (firebaseAuth == null) {
+      firebaseAuth = FirebaseAuth.instance;
+      update();
+    }
+    if (firebaseAuth.currentUser == null) {
+      return '/login';
+    } else {
+      firebaseUser = firebaseAuth.currentUser;
+      update();
+      return '/home';
+    }
+  }
 
   @override
   void onInit() {
     super.onInit();
-    print(user?.uid);
   }
 
   void loginGoogle() async {
     try {
-      await Firebase.initializeApp();
-      final GoogleSignInAccount googleSignInAccount =
-          await googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
+      Get.dialog(Center(child: LoadingWidget()), barrierDismissible: false);
+      await initlizeFirebaseApp();
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
+      firebaseAuth = FirebaseAuth.instance;
+      final googleUser = await googleSignIn.signIn();
+      final googleAuth = await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
 
-      final UserCredential authResult =
-          await _auth.signInWithCredential(credential);
-      final User user = authResult.user;
+      final userCredentialData =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      firebaseUser = userCredentialData.user;
 
-      if (user != null) {
-        Get.offAllNamed("/home");
-      }
+      update();
+      Get.back();
+      Get.offAllNamed('/home');
     } catch (e) {
+      Get.back();
       Get.snackbar("Erro ao logar", e.toString(),
           snackPosition: SnackPosition.BOTTOM);
     }
@@ -44,7 +69,7 @@ class LoginController extends GetxController {
 
   void sair() async {
     try {
-      await _auth.signOut();
+      await firebaseAuth.signOut();
       Get.offAllNamed("login");
     } catch (e) {
       Get.snackbar("Erro ao sair", e.toString(),

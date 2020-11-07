@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "757745219839-b3qdknujqrqhmdi6hukhn694g52d7aes.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kheronn.bora_bebe",
+            "certificate_hash": "cdfd5ab29ee47b08ab20fc9bf544d8aeca7cb516"
+          }
+        },
+        {
           "client_id": "757745219839-k6eg6hus1ae65p2njcfkrpsks37e20g1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
