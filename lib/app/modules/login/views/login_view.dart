@@ -1,4 +1,4 @@
-import 'package:bora_bebe/app/data/estados.dart';
+import 'package:bora_bebe/app/data/models/uf.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,11 +61,11 @@ class LoginView extends GetView<LoginController> {
   }
 
   Widget _comboEstados() {
-    return DropdownSearch<Estados>(
+    return DropdownSearch<Uf>(
       mode: Mode.DIALOG,
-      label: "Estado",
+      label: "UF",
       onFind: (String filter) => controller.getEstados(),
-      onChanged: (Estados data) {
+      onChanged: (Uf data) {
         print(data);
         controller.estadoSelecionado.value = data;
         print(controller.estadoSelecionado.value);

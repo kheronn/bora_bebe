@@ -38,7 +38,7 @@ dependencies:
   firebase_messaging: ^7.0.3
 
   #Uteis
-  dio:
+  http:
   dropdown_search:
   google_fonts: ^1.1.1
   intl: ^0.16.1

@@ -1,4 +1,4 @@
-import 'package:bora_bebe/app/data/estados.dart';
+import 'package:bora_bebe/app/data/models/uf.dart';
 import 'package:bora_bebe/app/shared/loading_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:dio/dio.dart';
+
 
 class LoginController extends GetxController {
   FirebaseApp firebaseApp;
@@ -14,8 +14,8 @@ class LoginController extends GetxController {
   FirebaseAuth firebaseAuth;
   final GoogleSignIn googleSignIn = new GoogleSignIn();
   final box = GetStorage();
-  final estadoSelecionado = Estados().obs;
-  final estados = List<Estados>().obs;
+  final estadoSelecionado = Uf().obs;
+  final estados = List<Uf>().obs;
 
   Future<void> initlizeFirebaseApp() async {
     firebaseApp = await Firebase.initializeApp();
@@ -71,13 +71,13 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<List<Estados>> getEstados() {
+  Future<List<Uf>> getEstados() {
     return Dio()
         .get("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
         .then(
           (res) => res?.data
-              ?.map<Estados>(
-                (u) => Estados.fromMap(u),
+              ?.map<Uf>(
+                (u) => Uf.fromMap(u),
               )
               ?.toList(),
         );
