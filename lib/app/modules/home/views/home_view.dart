@@ -24,10 +24,10 @@ class HomeView extends GetView<HomeController> {
       ),
       floatingActionButton: _buildFloatingActionButton(),
       body: Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+        child: Obx(() => Text(
+              controller.municipio,
+              style: TextStyle(fontSize: 20),
+            )),
       ),
     );
   }

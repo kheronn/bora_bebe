@@ -39,6 +39,7 @@ dependencies:
 
   #Uteis
   http:
+  dio:
   dropdown_search:
   google_fonts: ^1.1.1
   intl: ^0.16.1

@@ -1,5 +1,3 @@
-import 'package:bora_bebe/app/data/models/uf.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bora_bebe/app/modules/login/controllers/login_controller.dart';
@@ -18,7 +16,6 @@ class LoginView extends GetView<LoginController> {
               Image(
                   image: AssetImage("assets/images/logo_circle.png"),
                   width: 400),
-              _comboEstados(),
               _botaoLogin(),
             ],
           ),
@@ -57,19 +54,6 @@ class LoginView extends GetView<LoginController> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _comboEstados() {
-    return DropdownSearch<Uf>(
-      mode: Mode.DIALOG,
-      label: "UF",
-      onFind: (String filter) => controller.getEstados(),
-      onChanged: (Uf data) {
-        print(data);
-        controller.estadoSelecionado.value = data;
-        print(controller.estadoSelecionado.value);
-      },
     );
   }
 }

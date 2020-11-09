@@ -4,13 +4,14 @@ class Uf {
   int id;
   String sigla;
   String nome;
+
   Uf({
     this.id,
     this.sigla,
     this.nome,
   });
 
-  factory Uf.fromMap(Map<String, dynamic> map) {
+  factory Uf.fromMap(Map<dynamic, dynamic> map) {
     if (map == null) return null;
 
     return Uf(

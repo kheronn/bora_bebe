@@ -28,4 +28,11 @@ class Municipio {
 
   factory Municipio.fromJson(String source) =>
       Municipio.fromMap(json.decode(source));
+
+  bool isEqual(Municipio model) {
+    return this?.id == model?.id;
+  }
+
+  @override
+  String toString() => nome;
 }

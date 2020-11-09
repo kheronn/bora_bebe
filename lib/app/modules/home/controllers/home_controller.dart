@@ -1,18 +1,17 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
-  
-  final count = 0.obs;
+  final getStorage = GetStorage();
+  final _municipio = "".obs;
+  String get municipio => this._municipio.value;
 
   @override
-  void onInit() {}
-
-  @override
-  void onReady() {}
-
-  @override
-  void onClose() {}
-
-  void increment() => count.value++;
+  void onReady() {
+    if (getStorage.read("municipio") == null) {
+      Get.offAllNamed('/config-lugar');
+    } else {
+      _municipio.value = getStorage.read("municipio");
+    }
+  }
 }

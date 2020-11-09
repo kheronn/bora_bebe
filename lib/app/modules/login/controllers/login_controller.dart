@@ -1,21 +1,15 @@
-import 'package:bora_bebe/app/data/models/uf.dart';
 import 'package:bora_bebe/app/shared/loading_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 
 class LoginController extends GetxController {
   FirebaseApp firebaseApp;
   User firebaseUser;
   FirebaseAuth firebaseAuth;
   final GoogleSignIn googleSignIn = new GoogleSignIn();
-  final box = GetStorage();
-  final estadoSelecionado = Uf().obs;
-  final estados = List<Uf>().obs;
 
   Future<void> initlizeFirebaseApp() async {
     firebaseApp = await Firebase.initializeApp();
@@ -34,7 +28,7 @@ class LoginController extends GetxController {
     } else {
       firebaseUser = firebaseAuth.currentUser;
       update();
-      return '/home';
+      return '/config-lugar';
     }
   }
 
@@ -63,24 +57,12 @@ class LoginController extends GetxController {
 
       update();
       Get.back();
-      Get.offAllNamed('/home');
+      Get.offAllNamed('/config-lugar');
     } catch (e) {
       Get.back();
       Get.snackbar("Erro ao logar", e.toString(),
           snackPosition: SnackPosition.BOTTOM);
     }
-  }
-
-  Future<List<Uf>> getEstados() {
-    return Dio()
-        .get("https://servicodados.ibge.gov.br/api/v1/localidades/estados")
-        .then(
-          (res) => res?.data
-              ?.map<Uf>(
-                (u) => Uf.fromMap(u),
-              )
-              ?.toList(),
-        );
   }
 
   void sair() async {

@@ -1,3 +1,5 @@
+import 'package:bora_bebe/app/modules/config_lugar/views/config_lugar_view.dart';
+import 'package:bora_bebe/app/modules/config_lugar/bindings/config_lugar_binding.dart';
 import 'package:bora_bebe/app/modules/login/views/login_view.dart';
 import 'package:bora_bebe/app/modules/login/bindings/login_binding.dart';
 import 'package:bora_bebe/app/modules/home/views/home_view.dart';
@@ -21,6 +23,11 @@ class AppPages {
       name: Routes.LOGIN, 
       page:()=> LoginView(), 
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: Routes.CONFIG_LUGAR, 
+      page:()=> ConfigLugarView(), 
+      binding: ConfigLugarBinding(),
     ),
   ];
 }
