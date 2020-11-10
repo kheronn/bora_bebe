@@ -10,6 +10,7 @@ class ConfigLugarView extends GetView<ConfigLugarController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Container(
         decoration: _buildFundoGradiente(),
         child: Container(
