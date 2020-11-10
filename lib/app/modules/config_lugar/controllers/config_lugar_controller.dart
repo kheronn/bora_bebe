@@ -16,7 +16,7 @@ class ConfigLugarController extends GetxController {
   set municipioSelecionado(value) =>
       this._municipioSelecionado.value.nome = value;
   String get municipioSelecionado =>
-      this._municipioSelecionado?.value.nome == null
+      this._municipioSelecionado?.value?.nome == null
           ? ''
           : this._municipioSelecionado.value.nome.toUpperCase();
 

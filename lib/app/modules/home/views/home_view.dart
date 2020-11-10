@@ -1,3 +1,4 @@
+import 'package:bora_bebe/app/shared/cad_bera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bora_bebe/app/modules/home/controllers/home_controller.dart';
@@ -33,9 +34,18 @@ class HomeView extends GetView<HomeController> {
   }
 
   _buildFloatingActionButton() {
-    return FloatingActionButton(
-      child: Image(image: AssetImage("assets/images/beer.png"), width: 60.0),
-      onPressed: () {},
+    return SizedBox(
+      height: 100,
+      width: 100,
+      child: Container(
+        child: FloatingActionButton(
+          child:
+              Image(image: AssetImage("assets/images/beer.png"), width: 60.0),
+          onPressed: () {
+            Get.dialog(CadBera());
+          },
+        ),
+      ),
     );
   }
 }
