@@ -19,6 +19,12 @@ class CadBera extends StatelessWidget {
           title: Text("Compartilhe a Promoção"),
           centerTitle: true,
           backgroundColor: Colors.red[400],
+          actions: [
+            IconButton(
+              icon: Icon(Icons.image_search_rounded),
+              onPressed: () {},
+            )
+          ],
         ),
         floatingActionButton: _buildFloatingActionButton(),
         body: SafeArea(
@@ -69,6 +75,24 @@ class CadBera extends StatelessWidget {
                     labelText: 'Preço*',
                   ),
                 ),
+                SizedBox(height: 10),
+                Row(children: <Widget>[
+                  new Expanded(
+                      child: new TextFormField(
+                    onTap: () {
+                      _chooseDate();
+                    },
+                    decoration: new InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      prefixIcon: const Icon(Icons.calendar_today),
+                      hintText: '',
+                      labelText: 'Data final da promoção',
+                    ),
+                    keyboardType: TextInputType.datetime,
+                  )),
+                ]),
                 SizedBox(height: 10),
                 DateTimeField(
                     format: _dateFormat,
@@ -124,5 +148,17 @@ class CadBera extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future _chooseDate() async {
+    var now = new DateTime.now();
+
+    var result = await showDatePicker(
+        initialDate: now,
+        firstDate: now,
+        lastDate: new DateTime(2100),
+        context: Get.context);
+
+    if (result == null) return;
   }
 }
