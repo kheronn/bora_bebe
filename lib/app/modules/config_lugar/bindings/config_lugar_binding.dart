@@ -6,8 +6,9 @@ import 'package:bora_bebe/app/modules/config_lugar/controllers/config_lugar_cont
 class ConfigLugarBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut(() => APIs());
     Get.lazyPut<ConfigLugarController>(
-      () => ConfigLugarController(IbgeAPI()),
+      () => ConfigLugarController(Get.find()),
     );
   }
 }

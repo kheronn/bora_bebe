@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ConfigLugarController extends GetxController {
-  final IbgeAPI _api;
+  final APIs _api;
   final box = GetStorage();
   final _estadoSelecionado = Uf().obs;
   int get estadoSelecionado => _estadoSelecionado.value.id;

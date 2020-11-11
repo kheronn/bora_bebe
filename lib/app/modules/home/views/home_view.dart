@@ -42,7 +42,7 @@ class HomeView extends GetView<HomeController> {
           child:
               Image(image: AssetImage("assets/images/beer.png"), width: 60.0),
           onPressed: () {
-            Get.dialog(CadBera());
+            Get.toNamed('/add-promocao');
           },
         ),
       ),

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Bera {
+class Promocao {
   String marca;
   String descricao;
   double preco;
@@ -11,7 +11,7 @@ class Bera {
   String lugar;
   double latitude;
   double longitude;
-  Bera({
+  Promocao({
     this.marca,
     this.descricao,
     this.preco,
@@ -39,10 +39,10 @@ class Bera {
     };
   }
 
-  factory Bera.fromMap(Map<String, dynamic> map) {
+  factory Promocao.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    return Bera(
+    return Promocao(
       marca: map['marca'],
       descricao: map['descricao'],
       preco: map['preco'],
@@ -58,7 +58,8 @@ class Bera {
 
   String toJson() => json.encode(toMap());
 
-  factory Bera.fromJson(String source) => Bera.fromMap(json.decode(source));
+  factory Promocao.fromJson(String source) =>
+      Promocao.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -69,7 +70,7 @@ class Bera {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is Bera &&
+    return o is Promocao &&
         o.marca == marca &&
         o.descricao == descricao &&
         o.preco == preco &&

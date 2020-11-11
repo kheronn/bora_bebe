@@ -1,3 +1,5 @@
+import 'package:bora_bebe/app/modules/add-promocao/bindings/add_promocao_binding.dart';
+import 'package:bora_bebe/app/modules/add-promocao/views/add_promocao_view.dart';
 import 'package:bora_bebe/app/modules/config_lugar/views/config_lugar_view.dart';
 import 'package:bora_bebe/app/modules/config_lugar/bindings/config_lugar_binding.dart';
 import 'package:bora_bebe/app/modules/login/views/login_view.dart';
@@ -20,14 +22,19 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: Routes.LOGIN, 
-      page:()=> LoginView(), 
+      name: Routes.LOGIN,
+      page: () => LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
-      name: Routes.CONFIG_LUGAR, 
-      page:()=> ConfigLugarView(), 
+      name: Routes.CONFIG_LUGAR,
+      page: () => ConfigLugarView(),
       binding: ConfigLugarBinding(),
+    ),
+    GetPage(
+      name: Routes.ADD_PROMOCAO,
+      page: () => AddPromocaoView(),
+      binding: AddPromocaoBinding(),
     ),
   ];
 }
