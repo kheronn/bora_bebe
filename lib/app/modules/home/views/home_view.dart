@@ -1,4 +1,3 @@
-import 'package:bora_bebe/app/shared/cad_bera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bora_bebe/app/modules/home/controllers/home_controller.dart';

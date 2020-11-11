@@ -3,14 +3,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PromocaoService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  CollectionReference _collection;
 
-  getBeras(String municicpio) {
+  PromocaoService() {
+    _collection = _firestore.collection('pontos');
+  }
+
+  Future<DocumentReference> add(Promocao promocao) {
+    return _collection.add(promocao.toMap());
+  }
+
+  Stream<List<Promocao>> getPromocoes(String municicpio) {
     return _firestore
         .collection("promocoes")
         .where("municicpio", isEqualTo: municicpio)
         .orderBy(
           "dataBera",
         )
-        .snapshots();
+        .snapshots()
+        .map((QuerySnapshot query) {
+      List<Promocao> promocoes = List();
+      query.docs.forEach((element) {
+        promocoes.add(Promocao.fromDocumentSnapshot(element));
+      });
+      return promocoes;
+    });
   }
 }

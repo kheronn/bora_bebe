@@ -3,16 +3,9 @@ import 'package:bora_bebe/app/modules/add-promocao/controllers/add_promocao_cont
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class AddPromocaoView extends GetView<AddPromocaoController> {
-  final _dateFormat = DateFormat('dd/MM/yyyy');
-  final _moneyFormat = NumberFormat("#,##0.00", "pt_BR");
-  final _maskMoney = MoneyMaskedTextController(
-      decimalSeparator: ',', thousandSeparator: '.'); //after
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +38,7 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
                     hintText: 'Nome do local',
                     labelText: 'Nome do Local*',
                   ),
+                  onChanged: (lugar) => controller.promocao.lugar = lugar,
                 ),
                 SizedBox(height: 10),
                 DropdownSearch<Cerveja>(
@@ -55,7 +49,7 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
                   dropdownSearchDecoration: _buildInputDecoration(),
                   onFind: (String filter) => controller.getCervejas(),
                   onChanged: (Cerveja data) {
-                    print(data);
+                    controller.promocao.marca = data.marca;
                   },
                   dropdownBuilder: _customDropDownExample,
                   popupItemBuilder: _customPopupItemBuilderExample2,
@@ -79,8 +73,8 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
                           label: "Volume",
                           selectedItem: "300ml",
                           dropdownSearchDecoration: _buildInputDecoration(),
-                          onChanged: (String data) {
-                            print(data);
+                          onChanged: (String volume) {
+                            controller.promocao.volume = volume;
                           },
                         ),
                       ),
@@ -90,7 +84,7 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
                     ),
                     Flexible(
                       child: TextFormField(
-                        controller: _maskMoney,
+                        controller: controller.maskMoney,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.fromLTRB(0, 35, 0, 30),
@@ -101,13 +95,15 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
                           hintText: "0,00",
                           labelText: 'Preço*',
                         ),
+                        onChanged: (preco) =>
+                            controller.promocao.preco = preco.to,
                       ),
                     )
                   ],
                 ),
                 SizedBox(height: 10),
                 DateTimeField(
-                    format: _dateFormat,
+                    format: controller.dateFormat,
                     decoration: InputDecoration(
                         labelText: "Data final da promoção",
                         border: OutlineInputBorder(
@@ -160,18 +156,6 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
         ),
       ),
     );
-  }
-
-  Future _chooseDate() async {
-    var now = new DateTime.now();
-
-    var result = await showDatePicker(
-        initialDate: now,
-        firstDate: now,
-        lastDate: new DateTime(2100),
-        context: Get.context);
-
-    if (result == null) return;
   }
 
   Widget _customDropDownExample(

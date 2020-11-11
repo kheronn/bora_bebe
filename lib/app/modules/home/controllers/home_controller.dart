@@ -8,6 +8,7 @@ class HomeController extends GetxController {
 
   @override
   void onReady() {
+    super.onReady();
     if (getStorage.read("municipio") == null) {
       Get.offAllNamed('/config-lugar');
     } else {

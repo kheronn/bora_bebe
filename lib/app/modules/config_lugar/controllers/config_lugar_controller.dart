@@ -24,9 +24,8 @@ class ConfigLugarController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    super.onInit();
     ever(_estadoSelecionado, (_) => getMunicipios());
-
-    //await getUfs();
   }
 
   Future<List<Uf>> getUfs() {

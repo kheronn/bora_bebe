@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:bora_bebe/app/data/models/cerveja.dart';
 import 'package:bora_bebe/app/data/models/municipio.dart';
 import 'package:bora_bebe/app/data/models/uf.dart';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 
 class APIs {
   static const String urlIBGE =

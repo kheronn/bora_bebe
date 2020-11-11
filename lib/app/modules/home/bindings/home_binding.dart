@@ -1,3 +1,4 @@
+import 'package:bora_bebe/app/data/providers/promocao_service.dart';
 import 'package:get/get.dart';
 
 import 'package:bora_bebe/app/modules/home/controllers/home_controller.dart';
@@ -8,5 +9,6 @@ class HomeBinding extends Bindings {
     Get.lazyPut<HomeController>(
       () => HomeController(),
     );
+    Get.lazyPut(() => PromocaoService());
   }
 }

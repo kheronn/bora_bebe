@@ -1,12 +1,15 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Promocao {
   String marca;
   String descricao;
   double preco;
+  String volume;
   String comentario;
   String municicpio;
-  DateTime dataBera;
+  DateTime dataPromocao;
   DateTime dataExpira;
   String lugar;
   double latitude;
@@ -15,23 +18,47 @@ class Promocao {
     this.marca,
     this.descricao,
     this.preco,
+    this.volume,
     this.comentario,
     this.municicpio,
-    this.dataBera,
+    this.dataPromocao,
     this.dataExpira,
     this.lugar,
     this.latitude,
     this.longitude,
   });
 
+  Promocao.fromDocumentSnapshot(
+    DocumentSnapshot doc,
+  ) {
+    //id = documentSnapshot.documentID;
+    this.marca = doc.data()["marca"];
+    this.descricao = doc.data()["descricao"] ?? '';
+    this.preco = doc.data()["preco"];
+    this.volume = doc.data()["volume"];
+    this.comentario = doc.data()["comentario"] ?? '';
+    this.municicpio = doc.data()["municipio"];
+    Timestamp timestampDataPonto = doc.data()["dataPromocao"];
+    this.dataPromocao = DateTime.fromMillisecondsSinceEpoch(
+        timestampDataPonto.millisecondsSinceEpoch);
+    Timestamp timestampDataExpira = doc.data()["dataPromocao"];
+    this.dataExpira = DateTime.fromMillisecondsSinceEpoch(
+        timestampDataExpira.millisecondsSinceEpoch);
+
+    this.lugar = doc.data()["lugar"];
+    this.latitude = doc.data()["latitude"];
+    this.longitude = doc.data()["longitude"];
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'marca': marca,
       'descricao': descricao,
       'preco': preco,
+      'volume': volume,
       'comentario': comentario,
       'municicpio': municicpio,
-      'dataBera': dataBera?.millisecondsSinceEpoch,
+      'dataBera': dataPromocao?.millisecondsSinceEpoch,
       'dataExpira': dataExpira?.millisecondsSinceEpoch,
       'lugar': lugar,
       'latitude': latitude,
@@ -46,9 +73,10 @@ class Promocao {
       marca: map['marca'],
       descricao: map['descricao'],
       preco: map['preco'],
+      volume: map['volume'],
       comentario: map['comentario'],
       municicpio: map['municicpio'],
-      dataBera: DateTime.fromMillisecondsSinceEpoch(map['dataBera']),
+      dataPromocao: DateTime.fromMillisecondsSinceEpoch(map['dataBera']),
       dataExpira: DateTime.fromMillisecondsSinceEpoch(map['dataExpira']),
       lugar: map['lugar'],
       latitude: map['latitude'],
@@ -60,38 +88,4 @@ class Promocao {
 
   factory Promocao.fromJson(String source) =>
       Promocao.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'Bera(marca: $marca, descricao: $descricao, preco: $preco, comentario: $comentario, dataBera: $dataBera, dataExpira: $dataExpira, lugar: $lugar, latitude: $latitude, longitude: $longitude)';
-  }
-
-  @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
-
-    return o is Promocao &&
-        o.marca == marca &&
-        o.descricao == descricao &&
-        o.preco == preco &&
-        o.comentario == comentario &&
-        o.dataBera == dataBera &&
-        o.dataExpira == dataExpira &&
-        o.lugar == lugar &&
-        o.latitude == latitude &&
-        o.longitude == longitude;
-  }
-
-  @override
-  int get hashCode {
-    return marca.hashCode ^
-        descricao.hashCode ^
-        preco.hashCode ^
-        comentario.hashCode ^
-        dataBera.hashCode ^
-        dataExpira.hashCode ^
-        lugar.hashCode ^
-        latitude.hashCode ^
-        longitude.hashCode;
-  }
 }
