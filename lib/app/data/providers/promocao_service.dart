@@ -6,7 +6,7 @@ class PromocaoService {
   CollectionReference _collection;
 
   PromocaoService() {
-    _collection = _firestore.collection('pontos');
+    _collection = _firestore.collection('promocoes');
   }
 
   Future<DocumentReference> add(Promocao promocao) {

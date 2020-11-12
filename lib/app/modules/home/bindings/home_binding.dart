@@ -1,3 +1,4 @@
+import 'package:bora_bebe/app/data/providers/ibge_api.dart';
 import 'package:bora_bebe/app/data/providers/promocao_service.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,6 @@ class HomeBinding extends Bindings {
     Get.lazyPut<HomeController>(
       () => HomeController(),
     );
-    Get.lazyPut(() => PromocaoService());
+    Get.lazyPut(() => PromocaoService(), fenix: true);
   }
 }

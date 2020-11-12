@@ -9,7 +9,7 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Text("Compartilhe a Promoção"),
           centerTitle: true,
@@ -21,112 +21,125 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
             )
           ],
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: _buildFloatingActionButton(),
-        body: SafeArea(
-          bottom: true,
-          top: true,
-          child: Form(
-            child: ListView(
-              padding: EdgeInsets.all(16),
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Form(
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                padding: EdgeInsets.all(16),
+                children: [
+                  TextFormField(
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      prefixIcon: const Icon(Icons.pin_drop),
+                      hintText: 'Nome do local',
+                      labelText: 'Nome do Local*',
                     ),
-                    prefixIcon: const Icon(Icons.pin_drop),
-                    hintText: 'Nome do local',
-                    labelText: 'Nome do Local*',
+                    onChanged: (lugar) => controller.promocao.lugar = lugar,
                   ),
-                  onChanged: (lugar) => controller.promocao.lugar = lugar,
-                ),
-                SizedBox(height: 10),
-                DropdownSearch<Cerveja>(
-                  mode: Mode.DIALOG,
-                  showSearchBox: true,
-                  hint: "Nome da cerveja",
-                  label: "Cervejas",
-                  dropdownSearchDecoration: _buildInputDecoration(),
-                  onFind: (String filter) => controller.getCervejas(),
-                  onChanged: (Cerveja data) {
-                    controller.promocao.marca = data.marca;
-                  },
-                  dropdownBuilder: _customDropDownExample,
-                  popupItemBuilder: _customPopupItemBuilderExample2,
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      child: Flexible(
-                        child: DropdownSearch<String>(
-                          mode: Mode.MENU,
-                          items: [
-                            "300ml",
-                            "473ml",
-                            "600ml",
-                            "1L",
-                            "5L",
-                            "15L",
-                          ],
-                          label: "Volume",
-                          selectedItem: "300ml",
-                          dropdownSearchDecoration: _buildInputDecoration(),
-                          onChanged: (String volume) {
-                            controller.promocao.volume = volume;
-                          },
+                  SizedBox(height: 10),
+                  TextFormField(
+                    controller: controller.enderecoController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      prefixIcon: const Icon(Icons.place_rounded),
+                      hintText: 'Endereço:',
+                      labelText: '',
+                    ),
+                    onChanged: (endereco) =>
+                        controller.promocao.endereco = endereco,
+                  ),
+                  SizedBox(height: 10),
+                  DropdownSearch<Cerveja>(
+                    mode: Mode.DIALOG,
+                    showSearchBox: true,
+                    hint: "Nome da cerveja",
+                    label: "Cervejas",
+                    dropdownSearchDecoration: _buildInputDecoration(),
+                    onFind: (String filter) => controller.getCervejas(),
+                    onChanged: (Cerveja data) {
+                      controller.promocao.marca = data.marca;
+                    },
+                    dropdownBuilder: _customDropDownExample,
+                    popupItemBuilder: _customPopupItemBuilderExample2,
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Flexible(
+                          child: DropdownSearch<String>(
+                            mode: Mode.MENU,
+                            items: [
+                              "300ml",
+                              "473ml",
+                              "600ml",
+                              "1L",
+                              "5L",
+                              "15L",
+                            ],
+                            label: "Volume",
+                            selectedItem: "300ml",
+                            dropdownSearchDecoration: _buildInputDecoration(),
+                            onChanged: (String volume) {
+                              controller.promocao.volume = volume;
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Flexible(
-                      child: TextFormField(
-                        controller: controller.maskMoney,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(0, 35, 0, 30),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Flexible(
+                        child: TextFormField(
+                          controller: controller.maskMoney,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(0, 35, 0, 30),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            prefixIcon: const Icon(Icons.money),
+                            hintText: "0,00",
+                            labelText: 'Preço*',
+                          ),
+                          onChanged: (preco) => controller.promocao.preco =
+                              controller.maskMoney.numberValue,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  DateTimeField(
+                      format: controller.dateFormat,
+                      decoration: InputDecoration(
+                          labelText: "Data final da promoção",
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                          ),
-                          prefixIcon: const Icon(Icons.money),
-                          hintText: "0,00",
-                          labelText: 'Preço*',
-                        ),
-                        onChanged: (preco) =>
-                            controller.promocao.preco = preco.to,
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 10),
-                DateTimeField(
-                    format: controller.dateFormat,
-                    decoration: InputDecoration(
-                        labelText: "Data final da promoção",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        )),
-                    // initialValue: DateTime.,
-                    onShowPicker: (context, currentValue) {
-                      return showDatePicker(
-                        context: context,
-                        // firstDate: DateTime.now(),
-                        //  initialDate: currentValue ?? DateTime.now(),
-                        lastDate: DateTime(2100), firstDate: DateTime.now(),
-                        initialDate: DateTime.now(),
-                      );
-                    }),
-                SizedBox(height: 10),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Theme.of(context).primaryColor,
-                  ),
-                )
-              ],
+                          )),
+                      // initialValue: DateTime.,
+                      onShowPicker: (context, currentValue) async {
+                        final dataExpira = await showDatePicker(
+                          context: context,
+                          // firstDate: DateTime.now(),
+                          //  initialDate: currentValue ?? DateTime.now(),
+                          lastDate: DateTime(2100), firstDate: DateTime.now(),
+                          initialDate: DateTime.now(),
+                        );
+                        return controller.promocao.dataExpira = dataExpira;
+                      }),
+                  SizedBox(height: 10)
+                ],
+              ),
             ),
           ),
         ));
@@ -151,7 +164,8 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
           child: Image(
               image: AssetImage("assets/images/beer_add.png"), width: 115.0),
           onPressed: () {
-            Get.back();
+            controller.savePromocao();
+            //Get.back();
           },
         ),
       ),

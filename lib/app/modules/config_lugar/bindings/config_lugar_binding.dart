@@ -1,4 +1,3 @@
-import 'package:bora_bebe/app/data/providers/ibge_api.dart';
 import 'package:get/get.dart';
 
 import 'package:bora_bebe/app/modules/config_lugar/controllers/config_lugar_controller.dart';
@@ -6,7 +5,6 @@ import 'package:bora_bebe/app/modules/config_lugar/controllers/config_lugar_cont
 class ConfigLugarBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => APIs());
     Get.lazyPut<ConfigLugarController>(
       () => ConfigLugarController(Get.find()),
     );

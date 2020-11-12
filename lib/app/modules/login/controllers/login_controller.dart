@@ -28,7 +28,7 @@ class LoginController extends GetxController {
     } else {
       firebaseUser = firebaseAuth.currentUser;
       update();
-      return '/config-lugar';
+      return '/home';
     }
   }
 

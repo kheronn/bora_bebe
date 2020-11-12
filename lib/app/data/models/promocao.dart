@@ -8,10 +8,11 @@ class Promocao {
   double preco;
   String volume;
   String comentario;
-  String municicpio;
+  String municipio;
   DateTime dataPromocao;
   DateTime dataExpira;
   String lugar;
+  String endereco;
   double latitude;
   double longitude;
   Promocao({
@@ -20,10 +21,11 @@ class Promocao {
     this.preco,
     this.volume,
     this.comentario,
-    this.municicpio,
+    this.municipio,
     this.dataPromocao,
     this.dataExpira,
     this.lugar,
+    this.endereco,
     this.latitude,
     this.longitude,
   });
@@ -37,7 +39,7 @@ class Promocao {
     this.preco = doc.data()["preco"];
     this.volume = doc.data()["volume"];
     this.comentario = doc.data()["comentario"] ?? '';
-    this.municicpio = doc.data()["municipio"];
+    this.municipio = doc.data()["municipio"];
     Timestamp timestampDataPonto = doc.data()["dataPromocao"];
     this.dataPromocao = DateTime.fromMillisecondsSinceEpoch(
         timestampDataPonto.millisecondsSinceEpoch);
@@ -46,6 +48,7 @@ class Promocao {
         timestampDataExpira.millisecondsSinceEpoch);
 
     this.lugar = doc.data()["lugar"];
+    this.endereco = doc.data()["endereco"];
     this.latitude = doc.data()["latitude"];
     this.longitude = doc.data()["longitude"];
   }
@@ -57,10 +60,11 @@ class Promocao {
       'preco': preco,
       'volume': volume,
       'comentario': comentario,
-      'municicpio': municicpio,
-      'dataBera': dataPromocao?.millisecondsSinceEpoch,
+      'municicpio': municipio,
+      'dataPromocao': dataPromocao?.millisecondsSinceEpoch,
       'dataExpira': dataExpira?.millisecondsSinceEpoch,
       'lugar': lugar,
+      'endereco': endereco,
       'latitude': latitude,
       'longitude': longitude,
     };
@@ -75,10 +79,11 @@ class Promocao {
       preco: map['preco'],
       volume: map['volume'],
       comentario: map['comentario'],
-      municicpio: map['municicpio'],
-      dataPromocao: DateTime.fromMillisecondsSinceEpoch(map['dataBera']),
+      municipio: map['municicpio'],
+      dataPromocao: DateTime.fromMillisecondsSinceEpoch(map['dataPromocao']),
       dataExpira: DateTime.fromMillisecondsSinceEpoch(map['dataExpira']),
       lugar: map['lugar'],
+      endereco: map['endereco'],
       latitude: map['latitude'],
       longitude: map['longitude'],
     );
@@ -88,4 +93,9 @@ class Promocao {
 
   factory Promocao.fromJson(String source) =>
       Promocao.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'Promocao(marca: $marca, descricao: $descricao, preco: $preco, volume: $volume, comentario: $comentario, municicpio: $municipio, dataPromocao: $dataPromocao, dataExpira: $dataExpira, lugar: $lugar, latitude: $latitude, longitude: $longitude)';
+  }
 }
