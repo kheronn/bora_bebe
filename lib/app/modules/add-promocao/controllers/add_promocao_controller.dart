@@ -57,10 +57,10 @@ class AddPromocaoController extends GetxController {
   savePromocao() async {
     Get.dialog(Center(child: LoadingWidget()), barrierDismissible: false);
     try {
-      Get.back();
       if (promocao.lugar.isNullOrBlank ||
           promocao.marca.isNullOrBlank ||
           promocao.preco.isNullOrBlank) {
+        Get.back();
         showSnackBar(
             message: "Campos com * são obrigatórios!",
             color: Colors.red,

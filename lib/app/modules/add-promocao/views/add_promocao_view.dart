@@ -1,5 +1,6 @@
 import 'package:bora_bebe/app/data/models/cerveja.dart';
 import 'package:bora_bebe/app/modules/add-promocao/controllers/add_promocao_controller.dart';
+import 'package:bora_bebe/app/shared/constants.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
         appBar: AppBar(
           title: Text("Compartilhe a Promoção"),
           centerTitle: true,
-          backgroundColor: Colors.red[400],
+          backgroundColor: kPrimaryColor,
           actions: [
             IconButton(
               icon: Icon(Icons.image_search_rounded),
@@ -62,11 +63,12 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
                     mode: Mode.DIALOG,
                     showSearchBox: true,
                     hint: "Nome da cerveja",
-                    label: "Cervejas",
+                    label: "Cerveja*",
                     dropdownSearchDecoration: _buildInputDecoration(),
                     onFind: (String filter) => controller.getCervejas(),
                     onChanged: (Cerveja data) {
                       controller.promocao.marca = data.marca;
+                      controller.promocao.marcaImagem = data.imagem;
                     },
                     dropdownBuilder: _customDropDownExample,
                     popupItemBuilder: _customPopupItemBuilderExample2,
@@ -154,15 +156,15 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
 
   _buildFloatingActionButton() {
     return SizedBox(
-      height: 100,
-      width: 100,
+      height: 70,
+      width: 70,
       child: Container(
         child: FloatingActionButton(
           elevation: 5,
-          backgroundColor: Colors.red[200],
+          backgroundColor: kPrimaryColor,
           isExtended: true,
           child: Image(
-              image: AssetImage("assets/images/beer_add.png"), width: 115.0),
+              image: AssetImage("assets/images/beer_add.png"), width: 100),
           onPressed: () {
             controller.savePromocao();
             //Get.back();

@@ -1,4 +1,3 @@
-import 'package:bora_bebe/app/data/providers/ibge_api.dart';
 import 'package:bora_bebe/app/data/providers/promocao_service.dart';
 import 'package:get/get.dart';
 

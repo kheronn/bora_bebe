@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Promocao {
   String marca;
+  String marcaImagem;
   String descricao;
   double preco;
   String volume;
@@ -17,6 +18,7 @@ class Promocao {
   double longitude;
   Promocao({
     this.marca,
+    this.marcaImagem,
     this.descricao,
     this.preco,
     this.volume,
@@ -35,17 +37,19 @@ class Promocao {
   ) {
     //id = documentSnapshot.documentID;
     this.marca = doc.data()["marca"];
+    this.marcaImagem = doc.data()["marcaImagem"];
     this.descricao = doc.data()["descricao"] ?? '';
     this.preco = doc.data()["preco"];
     this.volume = doc.data()["volume"];
     this.comentario = doc.data()["comentario"] ?? '';
     this.municipio = doc.data()["municipio"];
-    Timestamp timestampDataPonto = doc.data()["dataPromocao"];
-    this.dataPromocao = DateTime.fromMillisecondsSinceEpoch(
-        timestampDataPonto.millisecondsSinceEpoch);
-    Timestamp timestampDataExpira = doc.data()["dataPromocao"];
-    this.dataExpira = DateTime.fromMillisecondsSinceEpoch(
-        timestampDataExpira.millisecondsSinceEpoch);
+    // Timestamp timestampDataPonto = doc.data()["dataPromocao"].to;
+    this.dataPromocao =
+        DateTime.fromMillisecondsSinceEpoch(doc.data()["dataPromocao"]);
+    // Timestamp timestampDataExpira = doc.data()["dataPromocao"];
+    this.dataExpira = doc.data()["dataExpira"] != null
+        ? DateTime.fromMillisecondsSinceEpoch(doc.data()["dataExpira"])
+        : null;
 
     this.lugar = doc.data()["lugar"];
     this.endereco = doc.data()["endereco"];
@@ -56,11 +60,12 @@ class Promocao {
   Map<String, dynamic> toMap() {
     return {
       'marca': marca,
+      'marcaImagem': marcaImagem,
       'descricao': descricao,
       'preco': preco,
       'volume': volume,
       'comentario': comentario,
-      'municicpio': municipio,
+      'municipio': municipio,
       'dataPromocao': dataPromocao?.millisecondsSinceEpoch,
       'dataExpira': dataExpira?.millisecondsSinceEpoch,
       'lugar': lugar,
@@ -75,11 +80,12 @@ class Promocao {
 
     return Promocao(
       marca: map['marca'],
+      marcaImagem: map['marcaImagem'],
       descricao: map['descricao'],
       preco: map['preco'],
       volume: map['volume'],
       comentario: map['comentario'],
-      municipio: map['municicpio'],
+      municipio: map['municipio'],
       dataPromocao: DateTime.fromMillisecondsSinceEpoch(map['dataPromocao']),
       dataExpira: DateTime.fromMillisecondsSinceEpoch(map['dataExpira']),
       lugar: map['lugar'],
