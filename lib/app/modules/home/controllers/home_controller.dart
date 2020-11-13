@@ -1,9 +1,12 @@
 import 'package:bora_bebe/app/data/models/promocao.dart';
+import 'package:bora_bebe/app/data/providers/auth_service.dart';
 import 'package:bora_bebe/app/data/providers/promocao_service.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
+  AuthService authService = Get.find();
+
   final getStorage = GetStorage();
   final _municipio = "".obs;
   String get municipio => this._municipio.value;

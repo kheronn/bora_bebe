@@ -29,13 +29,18 @@ class AddPromocaoController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    promocao.dataPromocao = DateTime.now();
-    promocao.municipio = getStorage.read("municipio");
+    initialValues();
     final _position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     promocao.latitude = _position.latitude;
     promocao.longitude = _position.longitude;
     await _getAddress(_position);
+  }
+
+  void initialValues() {
+    promocao.dataPromocao = DateTime.now();
+    promocao.municipio = getStorage.read("municipio");
+    promocao.volume = '300ml';
   }
 
   _getAddress(Position pos) async {
@@ -81,7 +86,6 @@ class AddPromocaoController extends GetxController {
           message: "Detalhes $erro",
           color: Colors.red,
           icon: Icon(Icons.error));
-      Get.back();
       Get.back();
     }
   }

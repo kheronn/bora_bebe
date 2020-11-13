@@ -1,5 +1,4 @@
 import 'package:bora_bebe/app/data/models/promocao.dart';
-import 'package:bora_bebe/app/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -21,7 +20,7 @@ class PromoCard extends StatelessWidget {
     return GestureDetector(
       onTap: press,
       child: Container(
-        width: defaultSize * 14.5, //145
+        width: defaultSize * 11.5, //145
         decoration: BoxDecoration(
           color: Colors.white60,
           borderRadius: BorderRadius.circular(30),
@@ -33,7 +32,7 @@ class PromoCard extends StatelessWidget {
               AspectRatio(
                 aspectRatio: 1,
                 child: Hero(
-                  tag: promocao.marca,
+                  tag: promocao.id,
                   child: FadeInImage.assetNetwork(
                     placeholder: "assets/images/spinner.gif",
                     image: promocao.marcaImagem,
@@ -46,11 +45,13 @@ class PromoCard extends StatelessWidget {
                 child: Text(
                   "${promocao.marca}  ${promocao.volume}",
                   style: TextStyle(
-                    fontSize: defaultSize * 1.6, //16
+                    fontSize: defaultSize * 1.4, //16
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
+              SizedBox(height: defaultSize / 2),
+              Text(promocao.lugar),
               SizedBox(height: defaultSize / 2),
               Text("R\$${moneyFormat.format(promocao.preco)}"),
               Spacer(),

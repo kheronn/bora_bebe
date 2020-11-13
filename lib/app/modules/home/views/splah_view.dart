@@ -13,7 +13,7 @@ class SplashView extends GetView<LoginController> {
   }
 
   changeScreen() async {
-    var result = await controller.checkUserLoggedIn();
+    var result = await controller.authService.checkUserLoggedIn();
     Get.offAllNamed(result);
   }
 

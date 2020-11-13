@@ -161,7 +161,7 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
       child: Container(
         child: FloatingActionButton(
           elevation: 5,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: kSecondaryColor,
           isExtended: true,
           child: Image(
               image: AssetImage("assets/images/beer_add.png"), width: 100),

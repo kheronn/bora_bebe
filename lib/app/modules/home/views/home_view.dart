@@ -1,3 +1,4 @@
+import 'package:bora_bebe/app/modules/home/views/drawer_view.dart';
 import 'package:bora_bebe/app/modules/home/widgets/promocoes_recentes.dart';
 import 'package:bora_bebe/app/shared/constants.dart';
 import 'package:bora_bebe/app/shared/loading_widget.dart';
@@ -11,6 +12,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: _buildAppBar(),
+      drawer: DrawerView(),
       floatingActionButton: _buildFloatingActionButton(),
       body: SingleChildScrollView(
         child: Padding(
@@ -49,16 +51,12 @@ class HomeView extends GetView<HomeController> {
     return AppBar(
       backgroundColor: kPrimaryColor,
       toolbarHeight: 65,
-      leading: IconButton(
-        icon: Icon(Icons.menu),
-        onPressed: () {},
-      ),
       centerTitle: true,
       title: Padding(
-        padding: const EdgeInsets.only(top: 8.0),
+        padding: const EdgeInsets.all(8.0),
         child: Image.asset(
-          "assets/images/logo_circle.png",
-          height: 110,
+          "assets/images/logo_circle_bar.png",
+          height: 60,
         ),
       ),
       actions: <Widget>[
@@ -66,15 +64,15 @@ class HomeView extends GetView<HomeController> {
           return [
             CheckedPopupMenuItem(
               value: 5,
-              child: Text('5 por página'),
+              child: Text('10 por página'),
             ),
             CheckedPopupMenuItem(
               value: 15,
-              child: Text('15 por página'),
+              child: Text('25 por página'),
             ),
             CheckedPopupMenuItem(
               value: 30,
-              child: Text('30 por página'),
+              child: Text('50 por página'),
             ),
           ];
         }),

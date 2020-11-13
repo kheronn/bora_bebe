@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Promocao {
+  String id;
   String marca;
   String marcaImagem;
   String descricao;
@@ -17,6 +18,7 @@ class Promocao {
   double latitude;
   double longitude;
   Promocao({
+    this.id,
     this.marca,
     this.marcaImagem,
     this.descricao,
@@ -35,7 +37,7 @@ class Promocao {
   Promocao.fromDocumentSnapshot(
     DocumentSnapshot doc,
   ) {
-    //id = documentSnapshot.documentID;
+    this.id = doc.id;
     this.marca = doc.data()["marca"];
     this.marcaImagem = doc.data()["marcaImagem"];
     this.descricao = doc.data()["descricao"] ?? '';
@@ -43,10 +45,8 @@ class Promocao {
     this.volume = doc.data()["volume"];
     this.comentario = doc.data()["comentario"] ?? '';
     this.municipio = doc.data()["municipio"];
-    // Timestamp timestampDataPonto = doc.data()["dataPromocao"].to;
     this.dataPromocao =
         DateTime.fromMillisecondsSinceEpoch(doc.data()["dataPromocao"]);
-    // Timestamp timestampDataExpira = doc.data()["dataPromocao"];
     this.dataExpira = doc.data()["dataExpira"] != null
         ? DateTime.fromMillisecondsSinceEpoch(doc.data()["dataExpira"])
         : null;

@@ -13,13 +13,11 @@ class PromocaoService {
     return _collection.add(promocao.toMap());
   }
 
-  Stream<List<Promocao>> getPromocoes(String municipio, {int limit = 5}) {
+  Stream<List<Promocao>> getPromocoes(String municipio, {int limit = 10}) {
     return _firestore
         .collection("promocoes")
         .where("municipio", isEqualTo: municipio)
-        .orderBy(
-          "dataPromocao",
-        )
+        .orderBy("dataPromocao", descending: true)
         .limit(limit)
         .snapshots()
         .map((QuerySnapshot query) {

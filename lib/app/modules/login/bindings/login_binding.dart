@@ -1,3 +1,4 @@
+import 'package:bora_bebe/app/data/providers/auth_service.dart';
 import 'package:bora_bebe/app/data/providers/ibge_api.dart';
 import 'package:get/get.dart';
 
@@ -10,5 +11,6 @@ class LoginBinding extends Bindings {
       () => LoginController(),
     );
     Get.lazyPut(() => APIs(), fenix: true);
+    Get.lazyPut(() => AuthService(), fenix: true);
   }
 }

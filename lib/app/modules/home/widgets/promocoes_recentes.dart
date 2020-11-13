@@ -26,7 +26,7 @@ class PromocoesRecentes extends StatelessWidget {
               Get.context.orientation == Orientation.portrait ? 2 : 4,
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
-          childAspectRatio: 0.793,
+          childAspectRatio: 0.693,
         ),
         itemBuilder: (context, index) => PromoCard(
             promocao: listPromocoes[index],
