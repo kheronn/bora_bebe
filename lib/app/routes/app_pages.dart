@@ -2,6 +2,8 @@ import 'package:bora_bebe/app/modules/add-promocao/bindings/add_promocao_binding
 import 'package:bora_bebe/app/modules/add-promocao/views/add_promocao_view.dart';
 import 'package:bora_bebe/app/modules/config_lugar/views/config_lugar_view.dart';
 import 'package:bora_bebe/app/modules/config_lugar/bindings/config_lugar_binding.dart';
+import 'package:bora_bebe/app/modules/detalhes-promocao/bindings/detalhes_promocao_binding.dart';
+import 'package:bora_bebe/app/modules/detalhes-promocao/views/detalhes_promocao_view.dart';
 import 'package:bora_bebe/app/modules/login/views/login_view.dart';
 import 'package:bora_bebe/app/modules/login/bindings/login_binding.dart';
 import 'package:bora_bebe/app/modules/home/views/home_view.dart';
@@ -35,6 +37,11 @@ class AppPages {
       name: Routes.ADD_PROMOCAO,
       page: () => AddPromocaoView(),
       binding: AddPromocaoBinding(),
+    ),
+    GetPage(
+      name: Routes.DETALHES_PROMOCAO,
+      page: () => DetalhesPromocaoView(),
+      binding: DetalhesPromocaoBinding(),
     ),
   ];
 }

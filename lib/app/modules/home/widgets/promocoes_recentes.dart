@@ -31,7 +31,8 @@ class PromocoesRecentes extends StatelessWidget {
         itemBuilder: (context, index) => PromoCard(
             promocao: listPromocoes[index],
             press: () {
-              print("press");
+              Get.toNamed("/detalhes-promocao",
+                  arguments: listPromocoes[index]);
             }),
       ),
     );

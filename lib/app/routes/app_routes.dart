@@ -7,4 +7,5 @@ abstract class Routes {
   static const LOGIN = '/login';
   static const CONFIG_LUGAR = '/config-lugar';
   static const ADD_PROMOCAO = '/add-promocao';
+  static const DETALHES_PROMOCAO = '/detalhes-promocao';
 }
