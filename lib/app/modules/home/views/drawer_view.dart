@@ -45,24 +45,25 @@ class DrawerView extends GetView<HomeController> {
               ],
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text(controller.authService.firebaseUser.displayName ?? ''),
-            onTap: () {
-              controller.authService.signOut();
-            },
-          ),
+          Obx(() => ListTile(
+                leading: Icon(Icons.person),
+                title: Text(controller.usuario.value),
+                onTap: () {
+                  controller.authService.signOut();
+                },
+              )),
           ListTile(
             leading: Icon(Icons.work),
             title: Text('Encerrar sessão'),
             onTap: () {
               controller.authService.signOut();
             },
+            trailing: Icon(Icons.logout),
           ),
           ListTile(
             leading: Icon(Icons.info),
             title: Text(
-              'Aplicativo desenvolvido para compartilhamento de promoções de cervejas ',
+              'Aplicativo desenvolvido para compartilhamento de promoções de cervejas.',
               textAlign: TextAlign.justify,
               overflow: TextOverflow.visible,
             ),

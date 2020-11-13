@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
   AuthService authService = Get.find();
+  final usuario = "".obs;
 
   final getStorage = GetStorage();
   final _municipio = "".obs;
@@ -19,9 +20,8 @@ class HomeController extends GetxController {
   void onInit() async {
     super.onInit();
     _municipio.value = getStorage.read("municipio");
-    print(municipio);
     _promocoes.bindStream(_servicePromocao.getPromocoes(municipio));
-    print(promocoes.length);
+    usuario.value = authService.firebaseUser.displayName;
   }
 
   @override
