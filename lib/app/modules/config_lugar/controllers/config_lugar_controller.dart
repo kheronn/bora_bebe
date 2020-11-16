@@ -1,6 +1,7 @@
 import 'package:bora_bebe/app/data/models/municipio.dart';
 import 'package:bora_bebe/app/data/models/uf.dart';
 import 'package:bora_bebe/app/data/providers/ibge_api.dart';
+import 'package:bora_bebe/app/data/providers/notification_service.dart';
 import 'package:bora_bebe/app/shared/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 
 class ConfigLugarController extends GetxController {
   final APIs _api;
+  final NotificationService _notificationService = Get.find();
   final box = GetStorage();
   final _estadoSelecionado = Uf().obs;
   int get estadoSelecionado => _estadoSelecionado.value.id;
@@ -47,6 +49,8 @@ class ConfigLugarController extends GetxController {
           color: Colors.red);
     } else {
       await box.write('municipio', municipioSelecionado);
+      _notificationService.firebaseMessage
+          .subscribeToTopic(municipioSelecionado.replaceAll(' ', ''));
       Get.back();
       Get.offAllNamed('/home');
     }

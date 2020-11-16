@@ -14,7 +14,7 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
         appBar: AppBar(
           title: Text("Compartilhe a Promoção"),
           centerTitle: true,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: primaryColor,
           actions: [
             IconButton(
               icon: Icon(Icons.image_search_rounded),
@@ -161,7 +161,7 @@ class AddPromocaoView extends GetView<AddPromocaoController> {
       child: Container(
         child: FloatingActionButton(
           elevation: 5,
-          backgroundColor: kSecondaryColor,
+          backgroundColor: secondaryColor,
           isExtended: true,
           child: Image(
               image: AssetImage("assets/images/beer_add.png"), width: 100),

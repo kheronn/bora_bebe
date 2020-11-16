@@ -48,7 +48,7 @@ class PromocaoGeral extends StatelessWidget {
             Text(
               promocao.endereco,
               style: TextStyle(
-                color: kSecondaryColor.withOpacity(0.7),
+                color: secondaryColor.withOpacity(0.7),
                 height: 1.5,
               ),
             ),
@@ -60,7 +60,7 @@ class PromocaoGeral extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50),
                 ),
-                color: kPrimaryColor,
+                color: primaryColor,
                 onPressed: press,
                 child: Text(
                   "Add to Cart",

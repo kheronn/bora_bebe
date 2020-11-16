@@ -1,5 +1,6 @@
 import 'package:bora_bebe/app/data/models/municipio.dart';
 import 'package:bora_bebe/app/data/models/uf.dart';
+import 'package:bora_bebe/app/shared/constants.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -86,14 +87,15 @@ class ConfigLugarView extends GetView<ConfigLugarController> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Get.context.theme.primaryColor,
+            color: primaryColor,
           ),
           height: 50,
           child: Center(
             child: Text(
-              "Salvar",
+              "CONFIRMAR",
               style: TextStyle(
                 color: Colors.white,
+                fontSize: 24,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -113,7 +115,7 @@ class ConfigLugarView extends GetView<ConfigLugarController> {
           end: const FractionalOffset(0.0, 0.5),
           stops: [0.0, 1.0],
           tileMode: TileMode.clamp,
-          colors: [Colors.white54, Colors.lightBlue.shade100]),
+          colors: [Colors.white54, primaryColor.withOpacity(.4)]),
     );
   }
 }

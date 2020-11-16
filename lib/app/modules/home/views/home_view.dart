@@ -36,7 +36,7 @@ class HomeView extends GetView<HomeController> {
       width: 100,
       child: Container(
         child: FloatingActionButton(
-          backgroundColor: kPrimaryColor,
+          backgroundColor: primaryColor,
           child:
               Image(image: AssetImage("assets/images/beer.png"), width: 60.0),
           onPressed: () {
@@ -49,7 +49,7 @@ class HomeView extends GetView<HomeController> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: primaryColor,
       toolbarHeight: 65,
       centerTitle: true,
       title: Padding(

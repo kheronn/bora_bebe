@@ -32,7 +32,7 @@ class PromoCard2 extends StatelessWidget {
                   aspectRatio: 1.025,
                   child: Container(
                     padding: EdgeInsets.all(defaultSize * 2),
-                    color: kSecondaryColor,
+                    color: secondaryColor,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[

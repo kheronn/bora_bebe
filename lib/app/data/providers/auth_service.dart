@@ -17,6 +17,7 @@ class AuthService {
 
   Future<void> initlizeFirebaseApp() async {
     firebaseApp = await Firebase.initializeApp();
+    firebaseAuth = FirebaseAuth.instance;
   }
 
   Future<String> checkUserLoggedIn() async {
@@ -36,7 +37,6 @@ class AuthService {
   }
 
   FutureOr<User> loginGoogle() async {
-    firebaseAuth = FirebaseAuth.instance;
     final googleUser = await googleSignIn.signIn();
     final googleAuth = await googleUser.authentication;
 

@@ -17,7 +17,7 @@ class DetalhesPromocaoView extends GetView<DetalhesPromocaoController> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: primaryColor,
       toolbarHeight: 65,
       centerTitle: true,
       title: Padding(

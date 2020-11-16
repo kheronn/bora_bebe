@@ -17,7 +17,7 @@ class PromocaoInfo extends StatelessWidget {
         ? Get.context.height * 0.024
         : Get.context.width * 0.024;
     TextStyle lightTextStyle =
-        TextStyle(color: kSecondaryColor.withOpacity(0.6));
+        TextStyle(color: secondaryColor.withOpacity(0.6));
     return Container(
       padding: EdgeInsets.symmetric(horizontal: defaultSize * 2),
       height: defaultSize * 37.5, //375
@@ -51,7 +51,6 @@ class PromocaoInfo extends StatelessWidget {
               ),
             ),
             SizedBox(height: defaultSize * 2), //20
-            Text("Available Colors", style: lightTextStyle),
           ],
         ),
       ),
