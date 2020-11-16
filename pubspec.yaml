@@ -45,8 +45,11 @@ dependencies:
   dropdown_search:
   google_fonts: ^1.1.1
   datetime_picker_formfield: ^1.0.0
+  sliverbar_with_card: ^0.1.5
+  divine_card: ^0.1.0
   intl: ^0.16.1
   flutter_masked_text: ^0.8.0
+  flutter_map: ^0.10.1+1
 
 dev_dependencies:
   flutter_test:

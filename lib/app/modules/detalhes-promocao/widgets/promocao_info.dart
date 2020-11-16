@@ -2,14 +2,16 @@ import 'package:bora_bebe/app/data/models/promocao.dart';
 import 'package:bora_bebe/app/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class PromocaoInfo extends StatelessWidget {
-  const PromocaoInfo({
+  PromocaoInfo({
     Key key,
-    @required this.product,
+    @required this.promocao,
   }) : super(key: key);
 
-  final Promocao product;
+  final Promocao promocao;
+  final moneyFormat = NumberFormat("#,##0.00", "pt_BR");
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +28,13 @@ class PromocaoInfo extends StatelessWidget {
       // color: Colors.black45,
       child: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(product.marca.toUpperCase(), style: lightTextStyle),
+            Text(promocao.marca.toUpperCase(), style: lightTextStyle),
             SizedBox(height: defaultSize),
             Text(
-              product.lugar,
+              promocao.lugar.toUpperCase(),
               style: TextStyle(
                 fontSize: defaultSize * 2.4, //24
                 fontWeight: FontWeight.bold,
@@ -43,9 +45,9 @@ class PromocaoInfo extends StatelessWidget {
             SizedBox(height: defaultSize * 2),
             Text("Valor", style: lightTextStyle),
             Text(
-              "R\$${product.preco}",
+              "R\$${moneyFormat.format(promocao.preco)}",
               style: TextStyle(
-                fontSize: defaultSize * 1.6, //16
+                fontSize: 20, //16
                 fontWeight: FontWeight.bold,
                 height: 1.6,
               ),
@@ -54,22 +56,6 @@ class PromocaoInfo extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Container buildColorBox(double defaultSize,
-      {Color color, bool isActive = false}) {
-    return Container(
-      margin: EdgeInsets.only(top: defaultSize, right: defaultSize),
-      // For  fixed value we can use cont for better performance
-      padding: const EdgeInsets.all(5),
-      height: defaultSize * 2.4,
-      width: defaultSize * 2.4,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: isActive ? Text('oi') : SizedBox(),
     );
   }
 }

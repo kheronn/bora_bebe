@@ -35,10 +35,10 @@ class PromocaoGeral extends StatelessWidget {
       ),
       child: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              promocao.marca,
+              promocao.marca.toUpperCase() + " " + promocao.volume,
               style: TextStyle(
                 fontSize: defaultSize * 1.8,
                 fontWeight: FontWeight.bold,
@@ -52,7 +52,6 @@ class PromocaoGeral extends StatelessWidget {
                 height: 1.5,
               ),
             ),
-            SizedBox(height: defaultSize * 3),
             SizedBox(
               width: double.infinity,
               child: FlatButton(
@@ -62,13 +61,23 @@ class PromocaoGeral extends StatelessWidget {
                 ),
                 color: primaryColor,
                 onPressed: press,
-                child: Text(
-                  "Add to Cart",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: defaultSize * 1.6,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.place_outlined,
+                      color: Colors.white70,
+                    ),
+                    SizedBox(width: 20),
+                    Text(
+                      "VER NO MAPA",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

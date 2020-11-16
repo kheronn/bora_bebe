@@ -27,28 +27,6 @@ class DetalhesPromocaoView extends GetView<DetalhesPromocaoController> {
           height: 60,
         ),
       ),
-      actions: <Widget>[
-        PopupMenuButton(itemBuilder: (context) {
-          return [
-            CheckedPopupMenuItem(
-              value: 5,
-              child: Text('10 por página'),
-            ),
-            CheckedPopupMenuItem(
-              value: 15,
-              child: Text('25 por página'),
-            ),
-            CheckedPopupMenuItem(
-              value: 30,
-              child: Text('50 por página'),
-            ),
-          ];
-        }),
-        SizedBox(
-          // It means 5 because by out defaultSize = 10
-          width: 10,
-        )
-      ],
     );
   }
 }

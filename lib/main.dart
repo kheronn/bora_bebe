@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -17,6 +18,7 @@ void main() async {
       title: "Bora Bebe",
       initialBinding: LoginBinding(),
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(textTheme: GoogleFonts.robotoTextTheme()),
       initialRoute: '/',
       getPages: AppPages.routes,
       localizationsDelegates: [
