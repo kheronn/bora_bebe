@@ -7,4 +7,5 @@ Color titleColor = Color(0xff052250);
 
 const primaryColor = Color(0xFFF28482);
 const secondaryColor = Color(0xFFF3F6F8);
+const darkColor = Color(0xFFDA1E37);
 const kTextColor = Color(0xFF171717);
