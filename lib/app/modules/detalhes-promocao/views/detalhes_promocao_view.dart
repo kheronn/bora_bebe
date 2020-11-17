@@ -1,5 +1,4 @@
 import 'package:bora_bebe/app/modules/detalhes-promocao/controllers/detalhes_promocao_controller.dart';
-import 'package:bora_bebe/app/modules/detalhes-promocao/widgets/body.dart';
 import 'package:bora_bebe/app/modules/detalhes-promocao/widgets/promocao_detalhes.dart';
 import 'package:bora_bebe/app/shared/constants.dart';
 import 'package:flutter/material.dart';

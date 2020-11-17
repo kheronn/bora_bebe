@@ -13,7 +13,9 @@ class NotificationService {
     firebaseMessage.configure(
       onMessage: (Map<String, dynamic> message) async {
         Get.defaultDialog(
-            title: "Nova promoção", radius: 30, middleText: message.toString());
+            title: message['notification']['title'],
+            radius: 30,
+            middleText: message['notification']['body']);
         print("onMessage: $message");
       },
       onLaunch: (Map<String, dynamic> message) async {
