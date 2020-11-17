@@ -19,7 +19,7 @@ class HomeView extends GetView<HomeController> {
           padding: const EdgeInsets.all(8.0),
           child: Center(
             child: Obx(() {
-              if (controller.promocoes.isEmpty) {
+              if (controller.promocoes.isEmpty || controller.promocoes.isNull) {
                 return Center(child: LoadingWidget());
               }
               return PromocoesRecentes(controller.promocoes);
@@ -60,24 +60,29 @@ class HomeView extends GetView<HomeController> {
         ),
       ),
       actions: <Widget>[
-        PopupMenuButton(itemBuilder: (context) {
-          return [
-            CheckedPopupMenuItem(
-              value: 5,
-              child: Text('10 por página'),
-            ),
-            CheckedPopupMenuItem(
-              value: 15,
-              child: Text('25 por página'),
-            ),
-            CheckedPopupMenuItem(
-              value: 30,
-              child: Text('50 por página'),
-            ),
-          ];
-        }),
+        Obx(() => PopupMenuButton(
+            initialValue: controller.limit,
+            onSelected: (value) => controller.limit = value,
+            itemBuilder: (context) {
+              return [
+                CheckedPopupMenuItem(
+                  checked: controller.limit == 10,
+                  value: 10,
+                  child: Text('10 por página'),
+                ),
+                CheckedPopupMenuItem(
+                  value: 25,
+                  checked: controller.limit == 25,
+                  child: Text('25 por página'),
+                ),
+                CheckedPopupMenuItem(
+                  value: 50,
+                  checked: controller.limit == 50,
+                  child: Text('50 por página'),
+                ),
+              ];
+            })),
         SizedBox(
-          // It means 5 because by out defaultSize = 10
           width: 10,
         )
       ],

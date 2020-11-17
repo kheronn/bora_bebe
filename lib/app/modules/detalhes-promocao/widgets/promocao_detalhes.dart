@@ -105,7 +105,7 @@ class PromocaoDetalhes extends GetView<DetalhesPromocaoController> {
                               "MAPA",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -133,10 +133,10 @@ class PromocaoDetalhes extends GetView<DetalhesPromocaoController> {
                             ),
                             SizedBox(width: 20),
                             Text(
-                              "Compartilhar",
+                              "COMPARTILHAR",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

@@ -20,7 +20,7 @@ class ConfigLugarController extends GetxController {
   String get municipioSelecionado =>
       this._municipioSelecionado?.value?.nome == null
           ? ''
-          : this._municipioSelecionado.value.nome.toUpperCase();
+          : this._municipioSelecionado.value.nome;
 
   ConfigLugarController(this._api);
 

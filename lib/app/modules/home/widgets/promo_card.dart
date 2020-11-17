@@ -44,6 +44,7 @@ class PromoCard extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: defaultSize),
                 child: Text(
                   "${promocao.marca}  ${promocao.volume}",
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: defaultSize * 1.4, //16
                     fontWeight: FontWeight.bold,
@@ -51,9 +52,14 @@ class PromoCard extends StatelessWidget {
                 ),
               ),
               SizedBox(height: defaultSize / 2),
-              Text(promocao.lugar),
+              Text(
+                promocao.lugar.toUpperCase(),
+                overflow: TextOverflow.ellipsis,
+              ),
               SizedBox(height: defaultSize / 2),
-              Text("R\$${moneyFormat.format(promocao.preco)}"),
+              Text(
+                "R\$${moneyFormat.format(promocao.preco)}",
+              ),
               Spacer(),
             ],
           ),

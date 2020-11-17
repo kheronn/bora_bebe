@@ -16,13 +16,21 @@ class HomeController extends GetxController {
   final _promocoes = List<Promocao>().obs;
   List<Promocao> get promocoes => _promocoes;
 
+  final _limit = 10.obs;
+  int get limit => _limit.value;
+  set limit(value) => _limit.value = value;
+
   @override
   void onInit() async {
     super.onInit();
     _municipio.value = getStorage.read("municipio");
-    _promocoes.bindStream(_servicePromocao.getPromocoes(municipio));
-    usuario.value = authService.firebaseUser.displayName;
+    _promocoes.bindStream(getAll());
+    ever(_limit, (_) => getAll());
+    usuario.value = authService.firebaseUser?.displayName;
   }
+
+  Stream<List<Promocao>> getAll() =>
+      _servicePromocao.getPromocoes(municipio, limit: limit);
 
   @override
   void onReady() {
