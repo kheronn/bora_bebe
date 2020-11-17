@@ -1,8 +1,11 @@
 import 'package:bora_bebe/app/modules/detalhes-promocao/controllers/detalhes_promocao_controller.dart';
 import 'package:bora_bebe/app/shared/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:intl/intl.dart';
+import 'package:latlong/latlong.dart';
 
 class PromocaoDetalhes extends GetView<DetalhesPromocaoController> {
   final moneyFormat = NumberFormat("#,##0.00", "pt_BR");
@@ -21,7 +24,7 @@ class PromocaoDetalhes extends GetView<DetalhesPromocaoController> {
                   height: 300.0,
                   decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
-                      color: darkColor,
+                      color: darkColor.withOpacity(.5),
                       borderRadius: BorderRadius.circular(20.0),
                       boxShadow: <BoxShadow>[
                         BoxShadow(
@@ -87,7 +90,9 @@ class PromocaoDetalhes extends GetView<DetalhesPromocaoController> {
                           borderRadius: BorderRadius.circular(50),
                         ),
                         color: primaryColor,
-                        onPressed: () {},
+                        onPressed: () {
+                          _showMapa();
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -116,7 +121,9 @@ class PromocaoDetalhes extends GetView<DetalhesPromocaoController> {
                           borderRadius: BorderRadius.circular(50),
                         ),
                         color: Colors.green[300],
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.share();
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -143,6 +150,73 @@ class PromocaoDetalhes extends GetView<DetalhesPromocaoController> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showMapa() {
+    Get.dialog(
+      Stack(
+        children: [
+          Card(
+            child: FlutterMap(
+              options: new MapOptions(
+                boundsOptions: FitBoundsOptions(padding: EdgeInsets.all(8.0)),
+                center: new LatLng(controller.promocao.latitude,
+                    controller.promocao.longitude),
+                zoom: 16.0,
+              ),
+              layers: [
+                new TileLayerOptions(
+                    urlTemplate:
+                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    subdomains: ['a', 'b', 'c']),
+                new MarkerLayerOptions(
+                  markers: [
+                    new Marker(
+                      width: 30.0,
+                      height: 30.0,
+                      point: new LatLng(controller.promocao.latitude,
+                          controller.promocao.longitude),
+                      builder: (ctx) => new Container(
+                        child: Image(
+                            image: AssetImage("assets/images/beer.png"),
+                            width: 20.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+              child: Card(
+                //  margin: EdgeInsets.all(defaultSize * 1.5),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                color: primaryColor,
+                child: ListTile(
+                  leading: Image(
+                      image: AssetImage("assets/images/beer.png"), width: 35.0),
+                  title: Text(
+                    controller.promocao.endereco,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    "Você está aproximadamente ${controller?.distance?.round()} metros.",
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                  trailing: Icon(Icons.close_outlined),
+                  onTap: () => Get.back(),
+                ),
+              )),
+        ],
       ),
     );
   }
