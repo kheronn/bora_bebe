@@ -9,6 +9,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:intl/intl.dart';
 
 class AddPromocaoController extends GetxController {
@@ -73,12 +74,14 @@ class AddPromocaoController extends GetxController {
 
         return;
       }
-      promocaoService.add(promocao).then((value) => showSnackBar(
+
+      promocaoService.add(promocao).then((value) => buildDialog());
+      /*  promocaoService.add(promocao).then((value) => showSnackBar(
           message: "Promoção salva",
           color: Colors.blue,
-          icon: Icon(Icons.save)));
+          icon: Icon(Icons.save))); */
 
-      return Future.delayed(Duration(seconds: 2))
+      return Future.delayed(Duration(seconds: 5))
           .then((onValue) => Get.offNamed("/home"));
     } catch (erro) {
       showSnackBar(
@@ -103,5 +106,27 @@ class AddPromocaoController extends GetxController {
       shouldIconPulse: true,
       barBlur: 20,
     );
+  }
+
+  Future<void> buildDialog() async {
+    return showDialog(
+        context: Get.context,
+        builder: (_) => NetworkGiffyDialog(
+              image: Image.network(
+                "https://media4.giphy.com/media/3o85xjSETVG3OpPyx2/giphy.gif",
+                fit: BoxFit.cover,
+              ),
+              entryAnimation: EntryAnimation.TOP_LEFT,
+              title: Text(
+                'Obrigado por compartilhar!',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w700),
+              ),
+              description: Text(
+                'Todas da sua localização agora tem acesso a promoção',
+                textAlign: TextAlign.center,
+              ),
+              onOkButtonPressed: () {},
+            ));
   }
 }

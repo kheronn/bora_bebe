@@ -20,10 +20,9 @@ void main() async {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     Get.defaultDialog(
       title: message.notification.title,
-      radius: 20,
       middleText: message.notification.body,
     );
-
+    print('Message also contained a notification: ${message.notification}');
     if (message.notification != null) {
       print('Message also contained a notification: ${message.notification}');
     }
