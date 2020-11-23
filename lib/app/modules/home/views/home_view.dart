@@ -19,7 +19,7 @@ class HomeView extends GetView<HomeController> {
           padding: const EdgeInsets.all(8.0),
           child: Center(
             child: Obx(() {
-              if (controller.promocoes.isEmpty || controller.promocoes.isNull) {
+              if (controller.promocoes.isNull) {
                 return Center(child: LoadingWidget());
               }
               return PromocoesRecentes(controller.promocoes);
@@ -32,8 +32,8 @@ class HomeView extends GetView<HomeController> {
 
   _buildFloatingActionButton() {
     return SizedBox(
-      height: 100,
-      width: 100,
+      height: 75,
+      width: 75,
       child: Container(
         child: FloatingActionButton(
           backgroundColor: primaryColor,

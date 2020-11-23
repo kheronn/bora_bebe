@@ -13,19 +13,24 @@ class PromocaoService {
     return _collection.add(promocao.toMap());
   }
 
-  Stream<List<Promocao>> getPromocoes(String municipio, {int limit = 10}) {
+  Stream<List<Promocao>> getPromocoes(String municipio, {int limit = 5}) {
     return _firestore
         .collection("promocoes")
         .where("municipio", isEqualTo: municipio)
         .orderBy("dataPromocao", descending: true)
         .limit(limit)
         .snapshots()
-        .map((QuerySnapshot query) {
-      List<Promocao> promocoes = List();
-      query.docs.forEach((element) {
-        promocoes.add(Promocao.fromDocumentSnapshot(element));
-      });
-      return promocoes;
-    });
+        .map((snapShot) => snapShot.docs
+            .map((document) => Promocao.fromDocumentSnapshot(document))
+            .toList());
+
+    // Outra forma
+    //      .map((QuerySnapshot query) {
+    //   List<Promocao> promocoes = List();
+    //   query.docs.forEach((element) {
+    //     promocoes.add(Promocao.fromDocumentSnapshot(element));
+    //   });
+    //   return promocoes;
+    // });
   }
 }
